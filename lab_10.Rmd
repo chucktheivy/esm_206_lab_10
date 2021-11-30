@@ -1,0 +1,54 @@
+---
+title: "Lab 10"
+author: "Charlie Wilson"
+date: "11/30/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+library(usethis)
+library(janitor)
+
+#new packages
+library(beepr)
+library(praise)
+library(cowsay)
+library(paletteer)
+library(sf)
+```
+
+## Beepr
+
+Use the function "beep()"  to make an audio alert when your code is done running
+
+```{r}
+for(i in rev(seq(1:99))) {
+  
+  print(paste(i, "bottles of bear on the wall", i, "bottles of beer. Take one down pass it around", i-1, "bottles of beer on the wall"))
+}
+beep(4)
+```
+
+```{r}
+praise("${EXCLAMATION}...just like that!")
+
+
+```
+
+## paletteer for tousands of color palettes
+
+```{r}
+storms %>% 
+  group_by(name) %>% 
+  summarize(min_pressure = min(pressure, na.rm = TRUE)) %>% 
+  slice_min(n = 10, min_pressure) %>% 
+  ggplot(aes(x = min_pressure, y = name)) +
+  geom_col(aes(fill = name)) +
+  scale_fill_paletteer_d("tvthemes::simpsons")
+  
+```
+
+
